@@ -93,23 +93,54 @@ pipeline {
                 sh 'sudo docker push $DOCKER_IMAGE:latest'
             }
         }
-        // stage('Deploy Docker Container') {
-        //     when {
-        //         allOf {
-        //             expression { params.ENVIRONMENT == 'prod' }
-        //             expression { params.ACTION == 'deploy' }
-        //         }
-        //     }
-        //     steps {
-        //         sh """
-        //             sudo docker pull $DOCKER_IMAGE:latest
-        //             if [ "$(sudo docker ps -q -f name=canara_app_sak)" ]; then
-        //                 sudo docker rm -f canara_app_sak
-        //             fi
-        //             sudo docker run -d --name ${DOCKER_CONTAINER} -p 8085:8080 $DOCKER_IMAGE:latest
-        //         """
-        //     }
-        // }
+        stage('Logout from Docker Hub') {
+            when {
+                allOf {
+                    expression { params.ENVIRONMENT == 'prod' }
+                    expression { params.ACTION == 'deploy' }
+                }
+            }
+            steps {
+                sh 'sudo docker logout'
+            }
+        }
+        stage('Clean up Local Docker Images') {
+            when {
+                allOf {
+                    expression { params.ENVIRONMENT == 'prod' }
+                    expression { params.ACTION == 'deploy' }
+                }
+            }
+            steps {
+                sh '''
+                    sudo docker rmi $DOCKER_IMAGE:${BUILD_ID} $DOCKER_IMAGE:latest
+                    sudo docker image prune -af
+                '''
+            }
+        }
+        stage('Deploy Docker Container') {
+            when {
+                allOf {
+                    expression { params.ENVIRONMENT == 'prod' }
+                    expression { params.ACTION == 'deploy' }
+                }
+            }
+            steps {
+                sh """
+                    echo "🚀 Pulling latest image..."
+                    sudo docker pull $DOCKER_IMAGE:latest
+
+                    echo "🧹 Removing existing container if running..."
+                    if [ "$(sudo docker ps -aq -f name=${DOCKER_CONTAINER})" ]; then
+                        sudo docker rm -f ${DOCKER_CONTAINER}
+                    fi
+
+                    echo "✅ Starting new container..."
+                    sudo docker run -d --name ${DOCKER_CONTAINER} -p 8085:8080 $DOCKER_IMAGE:latest
+                """
+            }
+        }
+
         // stage('Remove Docker Container') {
         //     when {
         //         allOf {
