@@ -10,15 +10,10 @@ pipeline {
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['dev', 'prod'], description: 'Select deployment environment')
         choice(name: 'ACTION', choices: ['deploy', 'remove'], description: 'Select action to perform')
-        string(name: 'RECEIVER_EMAIL', defaultValue: 'team@gmail.com', description: 'Comma-separated recipient emails')
+        string(name: 'RECEIVER_EMAIL', defaultValue: 'sak@gmail.com', description: 'Comma-separated recipient emails')
     }
 
     stages {
-        stage('Check the docker installed or not'){
-            steps {
-                sh 'sudo docker --version'
-            }
-        }
         stage('Run in the Dev Environment') {
             when {
                 allOf {
@@ -225,7 +220,7 @@ pipeline {
                 }
             }
         }
-        stage('Clean Docker Environment') {
+        stage('Remove Docker Container in Production Server') {
             when {
                 allOf {
                     expression { params.ENVIRONMENT == 'prod' }
