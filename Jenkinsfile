@@ -282,14 +282,10 @@ pipeline {
     }
     post {
         success {
-            steps {
-                echo 'Pipeline completed successfully.'
-            }
+            echo 'Pipeline completed successfully.'
         }
         failure {
-            steps {
-                echo 'Pipeline failed. Please check the logs.'
-            }
+            echo 'Pipeline failed. Please check the logs.'
         }
     }
 }
