@@ -56,8 +56,6 @@ GMAIL_APP_PASS="xxxx" \
   <img src="https://img.shields.io/badge/Author-sak__shetty-purple?style=for-the-badge&logo=github">
 </p>
 <p align="center">
-  💡 Project crafted with passion by <b>sak_shetty</b> 🚀
+  💡 Project crafted with passion by <b>Sinchana</b> 🚀
 </p>
 ---
-
-**Script Done By sak_shetty**
