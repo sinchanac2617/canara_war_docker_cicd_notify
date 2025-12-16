@@ -1,53 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Canara DevOps Pipeline</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>Canara Project | CI/CD Pipeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #003973, #005AA7);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        nav h1 {
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            left: 0;
+            bottom: -5px;
+            background: #00e6ff;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 750px;
+        }
+
+        /* ===== PIPELINE FLOW ===== */
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .pipeline span {
+            padding: 14px 22px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .pipeline span:hover {
+            background: #00e6ff;
+            color: #003973;
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 230, 255, 0.4);
+        }
+
+        /* ===== BUTTON ===== */
+        .btn {
+            padding: 15px 40px;
+            background: #ffffff;
+            color: #003973;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            background: #00e6ff;
+            color: #003973;
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(0, 230, 255, 0.6);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.25);
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== ANIMATION ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 34px;
+            }
+
+            nav {
+                padding: 18px 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <h1>Canara Project</h1>
-      <nav>
-        <ul>
-          <li><a href="#pipeline">Pipeline</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <section id="hero">
+<!-- NAVBAR -->
+<nav>
+    <h1>Canara Project</h1>
+    <ul>
+        <li><a href="#">Pipeline</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
     <h2>AWS → GitHub → Jenkins → Maven → Tomcat → Docker</h2>
-    <p>Enterprise-grade Automated CI/CD Deployment Pipeline</p>
-    <a href="#pipeline">Explore Pipeline</a>
-  </section>
+    <p>
+        Enterprise-grade automated CI/CD pipeline demonstrating real-world DevOps practices,
+        containerized deployments, and continuous delivery using modern cloud technologies.
+    </p>
 
-  <section id="pipeline">
-    <h3>Deployment Architecture</h3>
-    <div class="pipeline-grid">
-      <div class="pipeline-box">AWS EC2<br><small>Cloud Compute</small></div>
-      <div class="pipeline-box">GitHub<br><small>Source Control</small></div>
-      <div class="pipeline-box">Jenkins<br><small>CI/CD Automation</small></div>
-      <div class="pipeline-box">Maven<br><small>Build System</small></div>
-      <div class="pipeline-box">Tomcat<br><small>Application Server</small></div>
-      <div class="pipeline-box">Docker<br><small>Container Deploy</small></div>
+    <!-- PIPELINE FLOW -->
+    <div class="pipeline">
+        <span>AWS</span>
+        <span>GitHub</span>
+        <span>Jenkins</span>
+        <span>Maven</span>
+        <span>Tomcat</span>
+        <span>Docker</span>
     </div>
-  </section>
 
-  <section id="about">
-    <h3>About Project</h3>
-    <p>This project demonstrates a modern DevOps pipeline with automated build,
-    test & deployment on cloud servers using AWS EC2, GitHub, Jenkins, Maven,
-    Tomcat & Docker.</p>
-  </section>
+    <a href="#" class="btn">Explore Pipeline</a>
+</section>
 
-  <footer>
-    Designed & Developed by <strong>sak_shetty</strong>
-  </footer>
+<!-- FOOTER -->
+<footer>
+    💡 Project crafted with passion by <b>Sinchana</b> 🚀 | CI/CD Automation Demo
+</footer>
+
 </body>
 </html>
